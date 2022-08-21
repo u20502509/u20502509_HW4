@@ -1,0 +1,47 @@
+﻿@model List<u20502509_HW4.View_Models.MammalVM>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 style="text-align: center; margin-top: 25px;">Endangered species:</h2>
+<h1 style="text-align:center; margin-top: 10px;">Mammals</h1> 
+<br />
+<br />
+
+<style>
+    #h1{
+        text-align:center;
+        background-color: cornsilk;
+
+    }
+</style>
+
+<div class="row">
+    @foreach (var mammal in Model)
+    {
+        <div class="col-sm-6">
+            <div class="card" style="width: 35rem; margin-bottom: 60px; padding: 2px;">
+                <img class="card-img-top" src="@mammal.MURL" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title">@mammal.Name</h2>
+                </div>
+                <div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><h4>Life Expectancy:</h4><p class="font-weight-bold">@mammal.Expectancy</p></li>
+                        <li class="list-group-item"><h4>Country Of Origin:</h4><p class="font-weight-bold">@mammal.Origin</p></li>
+                        <li class="list-group-item"><h4>Favourite Food:</h4><p class="font-weight-bold">@mammal.Food</p></li>
+                        <li class="list-group-item"><h4>Endangerment Status:</h4><p class="font-weight-bold">@mammal.Endangered</p></li>
+                        <li class="list-group-item"><h4>Gestation period:</h4><p class="font-weight-bold">@mammal.Gestation</p></li>
+                        <li class="list-group-item"><h4>Family:</h4><p class="font-weight-bold">@mammal.Family</p></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>
+
+    
+
+
+

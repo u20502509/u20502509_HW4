@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 style="text-align: center; margin-top: 25px;">Play our game!</h1>
+<h4 style="text-align: center">What is my name?</h4>
+<br />
+<br />
+<br />
+
+<body>
+
+    <div class="text-center">
+
+        <img src="..." id="displayimg" class="img-thumbnail" style="width: 575px; height:360px;" alt="...">
+        <br />
+        <br />
+        <div>
+            <div class="input-group mb-3">
+                <input type="text" id="answer" class="form-control" aria-label="Your Answer:" aria-describedby="basic-addon2" style="margin-left: 370px;">
+                <div class="input-group-append">
+                    <button id="btnNext" class="btn btn-outline-secondary" type="button" onclick="Next();">Next</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Your credits:</h5>
+                            <p id="credits" class="card-text">You have: 0 credits</p>
+                            <p id="total" class="card-text">You have R0 worth in donations</p>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bankCredits">
+                                Bank Credits
+                            </button>
+                            <button type="button" onclick="location.href='@Url.Action("Index","Projects")'" class="btn btn-success" data-toggle="modal">
+                                Make Donation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bankCredits" tabindex="-1" role="dialog" aria-labelledby="bankCredits" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Bank your credits</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="donation">Wow, you did so well in our game!</p>
+                    <p>If you are sure you want to end the game and make a donation, if you are please proceed to make a donation and if not you may continue playing.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Playing</button>
+                    <button onclick="location.href='@Url.Action("Index","Projects")'" id="modalButton" type="button" class="btn btn-success" data-dismiss="modal">Donate Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+<script>
+   
+    //animal arrays with images
+    var Images = ["https://files.worldwildlife.org/wwfcmsprod/images/Amur_Leopard_/story_full_width/9g51xqtsf1_amur_leopard_99144569.jpg",
+        "https://www.naturalworldsafaris.com/media/5570/nws-st-lowland-gorilla.jpg",
+        "https://media.npr.org/assets/img/2014/01/13/rhino132way-3c28d899f2fc6c8d9581d9ae873defc3c387b123.jpg",
+        "https://files.worldwildlife.org/wwfcmsprod/images/LG_Orangutans_Hero_image__c__naturepl.com_Anup_Shah_WWF.jpg/story_full_width/1y3j5is7n5_LG_Orangutans_Hero_image__c__naturepl.com_Anup_Shah_WWF.jpg",
+        "https://cf.ltkcdn.net/dogs/images/orig/233907-1600x1030-fast-facts-about-african-wild-dog.jpg",
+        "https://files.worldwildlife.org/wwfcmsprod/images/Giant_Panda/story_full_width/p80g9bsjj_giant_panda_shutterstock_86500690.jpg",
+        "https://cms.bbcearth.com/sites/default/files/2021-07/Siberian%20tiger%20in%20the%20snow_GettyImages-1287040214.jpg",
+        "https://www.akaroadolphins.co.nz/assets/Uploads/SliderBlockImages/Jumping-1.jpg",
+        "https://assets3.thrillist.com/v1/image/2624055/792x456/scale;webp=auto;jpeg_quality=60;progressive.jpg",
+        "https://www.goodnewsnetwork.org/wp-content/uploads/2022/07/36213329345_adddca26fb_k-1024x683.jpg",
+        "https://www.treehugger.com/thmb/rYPDZsLevHn5WBs-XuwMdi6BLuk=/4192x3144/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2020__01__snowy_owl_flying-cdff0730fab6435d8d0e1edffda3ca21.jpg",
+        "https://scx2.b-cdn.net/gfx/news/2021/expertsbelie.jpg",
+        "https://s3.amazonaws.com/mongabay-images/13/1202.baldibis.IMG_1040.600.jpg",
+        "https://cff2.earth.com/uploads/2021/10/20180948/African-grey-parrot-960x640.jpg",
+        "https://media.kidadl.com/Wattled_Curassow_Facts_You_Won_t_Believe_b815cf3481.jpg",
+        "https://www.aquarium.co.za/cache/ce_img_cache/local/24be6a810f238a37/15939342960_fc775d26a9_z_1_640_427_70.jpg",
+        "https://www.animal.photos/fish1/bream-zeb_files/bream_zebra1.jpg",
+        "https://ntbrand-wp.s3.amazonaws.com/impressivenature/wp-content/uploads/2020/04/17154046/capture03-1280x800-8.png",
+        "https://i.pinimg.com/originals/45/6c/a1/456ca12322fb48cbb445f39c12048dca.png",
+        "https://www.aquarium.co.za/uploads/files/galjoen1.jpg",
+        "https://www.aquariumofpacific.org/images/olc/red-abalone_noaa.jpg"];
+
+
+    var Animals = ["Amur leopard", "Eastern lowland gorilla", "Black rhino", "Oranguatng", "Wild dog", "Panda", "Siberian tiger", "Hectors dolphin",
+        "Kiwi", "Kakapo", "Snowy owl", "Condor", "Northern bald ibis", "African grey parrot", "Curassow",
+    "Steenbrass", "Zebra fish","West coast lobster","Musselcracker","Galjoen","Abalone"];
+
+
+    //generate random number and call both images and name of animal
+    var index = Math.floor(Math.random() * 22);
+
+    //functions for button click 
+
+    var credits = 0;
+    function Next() {
+       var index = Math.floor(Math.random() * 22);
+
+        var userAnswer = document.getElementById("answer").textContent;
+        var correctAnswer = Animals[index];
+        
+
+        if (userAnswer.toString == correctAnswer.toString) {
+            window.confirm("Yay, that is the correct answer. You have earned 10 credits!")
+            credits = credits + 10;
+            document.getElementById("answer").innerHTML = "";
+            document.getElementById("displayimg").src = Images[index];
+            document.getElementById("credits").innerHTML = "You have: " + credits + " credits";
+            var totalCredits = credits;
+            var donation = credits *14.5+150-10;
+            document.getElementById("total").innerHTML = "You have: R" + donation+" worth of donations";
+
+        }
+        else if (userAnswer.toString != correctAnswer.toString) {
+            window.confirm("Oops, please try again and fill in my name.")
+            document.getElementById("answer").textContent = "";
+        }
+        
+    }
+
+
+
+
+
+    document.getElementById("displayimg").src = Images[index];
+
+
+</script>
+

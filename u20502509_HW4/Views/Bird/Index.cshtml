@@ -1,0 +1,36 @@
+﻿@model List<u20502509_HW4.View_Models.BirdVM>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 style="text-align: center; margin-top: 25px;">Endangered species:</h2>
+<h1 style="text-align:center; margin-top: 25px;">Birds</h1>
+<br />
+<br />
+
+<div class="row">
+    @foreach (var bird in Model)
+    {
+        <div class="col-sm-6">
+            <div class="card" style="width: 35rem; margin-bottom: 60px; padding: 2px;">
+                <img class="card-img-top" src="@bird.BURL" alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title">@bird.Name</h2>
+                </div>
+                <div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><h4>Life Expectancy:</h4><p class="font-weight-bold">@bird.Expectancy</p></li>
+                        <li class="list-group-item"><h4>Country Of Origin:</h4><p class="font-weight-bold">@bird.Origin</p></li>
+                        <li class="list-group-item"><h4>Favourite Food:</h4><p class="font-weight-bold">@bird.Food</p></li>
+                        <li class="list-group-item"><h4>Endangerment Status:</h4><p class="font-weight-bold">@bird.Endangered</p></li>
+                        <li class="list-group-item"><h4>Gestation period:</h4><p class="font-weight-bold">@bird.Eggs</p></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
